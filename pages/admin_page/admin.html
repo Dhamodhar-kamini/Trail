@@ -323,12 +323,83 @@
             <button class="btn-icon">
               <i class="far fa-calendar-alt"></i> Feb 2026
             </button>
-            <button class="btn-primary">
-              <i class="fas fa-calendar-plus"></i> Add Schedule
+            <button class="btn-primary add-btn" id="openModal">
+              <i class="fas fa-calendar-plus emp-add-btn" id="empOpenBtn"></i>
+              Add Employee
             </button>
-            <button class="btn-secondary">
-              <i class="fas fa-plus"></i> Add Requests
-            </button>
+
+            <!-- Modal Overlay -->
+            <div class="emp-modal-overlay" id="empModal">
+              <div class="emp-modal-box">
+                <span class="emp-close-btn" id="empCloseBtn">&times;</span>
+
+                <!-- Icon -->
+                <div class="emp-modal-icon">
+                  <div class="emp-icon-circle">
+                    <span>+</span>
+                  </div>
+                </div>
+
+                <h2 class="emp-title">Add Employee to HR System</h2>
+                <p class="emp-subtitle">
+                  Add new employees and manage workforce efficiently.
+                </p>
+
+                <form id="empForm">
+                  <div class="emp-group">
+                    <label>Full Name <span>*</span></label>
+                    <input type="text" placeholder="Enter Full Name" required />
+                  </div>
+
+                  <div class="emp-group">
+                    <label>Email Address <span>*</span></label>
+                    <input
+                      type="email"
+                      placeholder="Enter Email Address"
+                      required
+                    />
+                  </div>
+
+                  <div class="emp-row">
+                    <div class="emp-group">
+                      <label>Department <span>*</span></label>
+                      <select required>
+                        <option>Design</option>
+                        <option>Development</option>
+                        <option>Marketing</option>
+                        <option>HR</option>
+                      </select>
+                    </div>
+
+                    <div class="emp-group">
+                      <label>Salary <span>*</span></label>
+                      <input type="number" placeholder="$ 4,200.00" required />
+                    </div>
+                  </div>
+
+                  <div class="emp-group">
+                    <label>Employee ID</label>
+                    <input
+                      type="text"
+                      placeholder="Enter 8 Digit Employee ID"
+                    />
+                  </div>
+
+                  <div class="emp-actions">
+                    <button
+                      type="button"
+                      class="emp-cancel-btn"
+                      id="empCancelBtn"
+                    >
+                      Cancel
+                    </button>
+                    <button type="submit" class="emp-submit-btn">
+                      Add Employee
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
 

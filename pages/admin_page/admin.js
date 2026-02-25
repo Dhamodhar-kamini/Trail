@@ -154,3 +154,26 @@ document.getElementById("dashboardMenu").addEventListener("click", function () {
     this.classList.toggle("open");
 
 });
+
+
+// popup section
+const empModal = document.getElementById("empModal");
+const empOpenBtn = document.getElementById("empOpenBtn");
+const empCloseBtn = document.getElementById("empCloseBtn");
+const empCancelBtn = document.getElementById("empCancelBtn");
+
+empOpenBtn.onclick = () => empModal.style.display = "flex";
+empCloseBtn.onclick = () => empModal.style.display = "none";
+empCancelBtn.onclick = () => empModal.style.display = "none";
+
+window.addEventListener("click", function(e){
+  if(e.target === empModal){
+    empModal.style.display = "none";
+  }
+});
+
+document.getElementById("empForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  alert("Employee Added Successfully ✅");
+  empModal.style.display = "none";
+});
