@@ -174,7 +174,7 @@ window.addEventListener("click", function(e){
 
 document.getElementById("empForm").addEventListener("submit", function(e){
   e.preventDefault();
-  alert("Employee Added Successfully ✅");
+  alert("Employee Added Successfully ");
   empModal.style.display = "none";
 });
 
