@@ -157,25 +157,176 @@ document.getElementById("dashboardMenu").addEventListener("click", function () {
 
 
 // popup section
-const empModal = document.getElementById("empModal");
-const empOpenBtn = document.getElementById("empOpenBtn");
-const empCloseBtn = document.getElementById("empCloseBtn");
-const empCancelBtn = document.getElementById("empCancelBtn");
+document.addEventListener('DOMContentLoaded', () => {
+    // --- DOM Elements ---
+    const empModal = document.getElementById("empModal");
+    const empOpenBtn = document.getElementById("empOpenBtn");
+    const empCloseBtn = document.getElementById("empCloseBtn");
+    const empCancelBtn = document.getElementById("empCancelBtn");
+    const empForm = document.getElementById("empForm");
+    
+    // Success Modal Elements
+    const successModal = document.getElementById("successModal");
+    const successOkBtn = document.getElementById("successOkBtn");
 
-empOpenBtn.onclick = () => empModal.style.display = "flex";
-empCloseBtn.onclick = () => empModal.style.display = "none";
-empCancelBtn.onclick = () => empModal.style.display = "none";
+    // --- Modal Open/Close Logic ---
+    
+    // Open Form
+    if(empOpenBtn) empOpenBtn.onclick = () => empModal.style.display = "flex";
+    
+    // Close Form Function
+    const closeFormModal = () => {
+        empModal.style.display = "none";
+        resetForm();
+    };
 
-window.addEventListener("click", function(e){
-  if(e.target === empModal){
-    empModal.style.display = "none";
-  }
-});
+    if(empCloseBtn) empCloseBtn.onclick = closeFormModal;
+    if(empCancelBtn) empCancelBtn.onclick = closeFormModal;
 
-document.getElementById("empForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  alert("Employee Added Successfully ");
-  empModal.style.display = "none";
+    // Close Modals on Outside Click
+    window.addEventListener("click", function(e){
+        if(e.target === empModal){
+            closeFormModal();
+        }
+        if(e.target === successModal){
+            successModal.style.display = "none";
+            resetForm();
+        }
+    });
+
+    // --- Validation Utilities ---
+
+    const setError = (element, message) => {
+        const inputControl = element.parentElement;
+        const errorDisplay = inputControl.querySelector('.error-msg');
+        
+        if(errorDisplay) {
+            errorDisplay.innerText = message;
+            errorDisplay.style.display = 'block';
+        }
+        element.classList.add('input-error');
+    }
+
+    const setSuccess = (element) => {
+        const inputControl = element.parentElement;
+        const errorDisplay = inputControl.querySelector('.error-msg');
+        
+        if(errorDisplay) {
+            errorDisplay.innerText = '';
+            errorDisplay.style.display = 'none';
+        }
+        element.classList.remove('input-error');
+    }
+
+    const isValidEmail = (email) => {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    // --- Main Validation Logic ---
+    const validateInputs = () => {
+        let isValid = true;
+
+        const name = document.getElementById('nameInput');
+        const email = document.getElementById('emailInput');
+        const password = document.getElementById('passwordInput');
+        const hireDate = document.getElementById('dateInput');
+        const salary = document.getElementById('salaryInput');
+
+        // Name
+        if(name.value.trim() === '') {
+            setError(name, 'Full name is required');
+            isValid = false;
+        } else {
+            setSuccess(name);
+        }
+
+        // Email
+        if(email.value.trim() === '') {
+            setError(email, 'Email is required');
+            isValid = false;
+        } else if (!isValidEmail(email.value.trim())) {
+            setError(email, 'Provide a valid email address');
+            isValid = false;
+        } else {
+            setSuccess(email);
+        }
+
+        // Password
+        if(password.value.trim() === '') {
+            setError(password, 'Password is required');
+            isValid = false;
+        } else if (password.value.trim().length < 6) {
+            setError(password, 'Password must be at least 6 characters');
+            isValid = false;
+        } else {
+            setSuccess(password);
+        }
+
+        // Date
+        if(hireDate.value === '') {
+            setError(hireDate, 'Hire date is required');
+            isValid = false;
+        } else {
+            setSuccess(hireDate);
+        }
+
+        // Salary
+        if(salary.value !== '' && salary.value < 0) {
+            setError(salary, 'Salary cannot be negative');
+            isValid = false;
+        } else {
+            setSuccess(salary);
+        }
+
+        return isValid;
+    };
+
+    // --- Form Submission & Success Logic ---
+
+    empForm.addEventListener("submit", function(e){
+        e.preventDefault();
+        
+        if(validateInputs()) {
+            // 1. Gather Data (for backend/console)
+            const formData = {
+                type: document.querySelector('input[name="empType"]:checked').value,
+                name: document.getElementById('nameInput').value,
+                email: document.getElementById('emailInput').value,
+                password: document.getElementById('passwordInput').value,
+                jobTitle: document.getElementById('jobInput').value,
+                department: document.getElementById('deptInput').value,
+                salary: document.getElementById('salaryInput').value,
+                location: document.getElementById('locationInput').value
+            };
+            
+            console.log("Employee Data Submitted:", formData);
+
+            // 2. Hide the Form Modal
+            empModal.style.display = "none";
+
+            // 3. Show the Success Modal (Replacing the alert)
+            if(successModal) {
+                successModal.style.display = "flex";
+            }
+        }
+    });
+
+    // Close Success Modal on "Continue" button click
+    if(successOkBtn) {
+        successOkBtn.onclick = () => {
+            successModal.style.display = "none";
+            resetForm(); // Clear the form data now that we are done
+        };
+    }
+
+    // --- Helper: Reset Form ---
+    function resetForm() {
+        empForm.reset();
+        // Remove error styles
+        const inputs = empForm.querySelectorAll('input, select');
+        inputs.forEach(input => setSuccess(input));
+    }
 });
 
 

@@ -329,60 +329,131 @@
             </button>
 
             <!-- Modal Overlay -->
+            <!-- Modal Overlay -->
             <div class="emp-modal-overlay" id="empModal">
               <div class="emp-modal-box">
                 <span class="emp-close-btn" id="empCloseBtn">&times;</span>
 
-                <!-- Icon -->
-                <div class="emp-modal-icon">
-                  <div class="emp-icon-circle">
-                    <span>+</span>
-                  </div>
-                </div>
+                <h2 class="emp-title">Add Employee</h2>
 
-                <h2 class="emp-title">Add Employee to HR System</h2>
-                <p class="emp-subtitle">
-                  Add new employees and manage workforce efficiently.
-                </p>
-
-                <form id="empForm">
+                <form id="empForm" novalidate>
+                  <!-- Employee Type Radio Buttons (From Image) -->
                   <div class="emp-group">
-                    <label>Full Name <span>*</span></label>
-                    <input type="text" placeholder="Enter Full Name" required />
-                  </div>
-
-                  <div class="emp-group">
-                    <label>Email Address <span>*</span></label>
-                    <input
-                      type="email"
-                      placeholder="Enter Email Address"
-                      required
-                    />
-                  </div>
-
-                  <div class="emp-row">
-                    <div class="emp-group">
-                      <label>Department <span>*</span></label>
-                      <select required>
-                        <option>Design</option>
-                        <option>Development</option>
-                        <option>Marketing</option>
-                        <option>HR</option>
-                      </select>
-                    </div>
-
-                    <div class="emp-group">
-                      <label>Salary <span>*</span></label>
-                      <input type="number" placeholder="$ 4,200.00" required />
+                    <label>Is this an employee or Intern?</label>
+                    <div class="radio-group">
+                      <label class="radio-label">
+                        <input
+                          type="radio"
+                          name="empType"
+                          value="employee"
+                          checked
+                        />
+                        <span>Employee</span>
+                      </label>
+                      <label class="radio-label">
+                        <input type="radio" name="empType" value="contractor" />
+                        <span>Intern</span>
+                      </label>
                     </div>
                   </div>
 
+                  <!-- Full Name -->
                   <div class="emp-group">
-                    <label>Employee ID</label>
+                    <label>Name <span>*</span></label>
                     <input
                       type="text"
-                      placeholder="Enter 8 Digit Employee ID"
+                      id="nameInput"
+                      placeholder="Enter name"
+                      required
                     />
+                    <small class="error-msg"></small>
+                  </div>
+
+                  <!-- Email -->
+                  <div class="emp-group">
+                    <label>Email <span>*</span></label>
+                    <input
+                      type="email"
+                      id="emailInput"
+                      placeholder="Enter email address"
+                      required
+                    />
+                    <small class="helper-text"
+                      >The email they will use to log into the system.</small
+                    >
+                    <small class="error-msg"></small>
+                  </div>
+
+                  <!-- Password (Requested Addition) -->
+                  <div class="emp-group">
+                    <label>Password <span>*</span></label>
+                    <input
+                      type="password"
+                      id="passwordInput"
+                      placeholder="Create a temporary password"
+                      required
+                    />
+                    <small class="error-msg"></small>
+                  </div>
+
+                  <!-- Hire Date -->
+                  <div class="emp-group">
+                    <label>Hire Date <span>*</span></label>
+                    <input type="date" id="dateInput" required />
+                    <small class="helper-text"
+                      >The first day of employment for this person.</small
+                    >
+                    <small class="error-msg"></small>
+                  </div>
+
+                  <!-- Job Title & Department Row -->
+                  <div class="emp-row">
+                    <div class="emp-group">
+                      <label>Job Title</label>
+                      <input
+                        type="text"
+                        id="jobInput"
+                        placeholder="Enter Job Title"
+                      />
+                    </div>
+                    <div class="emp-group">
+                      <label>Department</label>
+                      <input
+                        type="text"
+                        id="deptInput"
+                        placeholder="Enter Department"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Manager -->
+                  <div class="emp-group">
+                    <label>Manager</label>
+                    <select id="managerInput">
+                      <option value="">Please select manager</option>
+                      <option value="1">Narala Prasad Reddy</option>
+                      
+                    </select>
+                  </div>
+
+                  <!-- Salary -->
+                  <div class="emp-group">
+                    <label>Annual Salary</label>
+                    <input type="number" id="salaryInput" placeholder="0" />
+                    <small class="helper-text"
+                      >Annual salary is the current CTC. If monthly, multiply by
+                      12.</small
+                    >
+                    <small class="error-msg"></small>
+                  </div>
+
+                  <!-- Location -->
+                  <div class="emp-group">
+                    <label>Location</label>
+                    <input
+                      type="text"
+                      id="locationInput"
+                      placeholder="Enter work location" />
                   </div>
 
                   <div class="emp-actions">
@@ -396,10 +467,21 @@
                     <button type="submit" class="emp-submit-btn">
                       Add Employee
                     </button>
+                    <!-- Success Modal -->
                   </div>
                 </form>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="success-modal-overlay" id="successModal">
+          <div class="success-box">
+            <div class="success-icon-circle">
+              <i class="fas fa-check"></i>
+            </div>
+            <h2>Success!</h2>
+            <p>The new employee has been added successfully.</p>
+            <button class="success-btn" id="successOkBtn">Continue</button>
           </div>
         </div>
 
@@ -422,35 +504,36 @@
             </div>
             <p>Attendance Overview</p>
             <h3>120/154</h3>
-            <a href="#" class="view-details-link attendance-trigger">View Details</a>
+            <a href="#" class="view-details-link attendance-trigger"
+              >View Details</a
+            >
           </div>
-          
-    <!-- MODAL POPUP (Styled like the Permission Request Table) -->
-    <div id="detailModal" class="modal">
-        <div class="modal-content modal-table-view">
-            <div class="modal-header">
+
+          <!-- MODAL POPUP (Styled like the Permission Request Table) -->
+          <div id="detailModal" class="modal">
+            <div class="modal-content modal-table-view">
+              <div class="modal-header">
                 <h2 id="modalTitle">Attendance Detail Log</h2>
                 <span class="close-btn">&times;</span>
-            </div>
-            <div class="modal-body">
+              </div>
+              <div class="modal-body">
                 <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Employee</th>
-                            <th>Date</th>
-                            <th>Check In</th>
-                            <th>Check Out</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody id="modalTableBody">
-                        <!-- Rows populated by JS -->
-                    </tbody>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Employee</th>
+                      <th>Date</th>
+                      <th>Check In</th>
+                      <th>Check Out</th>
+                    </tr>
+                  </thead>
+                  <tbody id="modalTableBody">
+                    <!-- Rows populated by JS -->
+                  </tbody>
                 </table>
+              </div>
             </div>
-        </div>
-    </div>
+          </div>
           <div class="stat-card">
             <div class="icon-circle bg-icon-blue">
               <i class="fas fa-project-diagram"></i>
@@ -738,47 +821,51 @@
                   ><span class="value">04</span>
                 </div>
               </div>
-              
-              <a href="#" class="view-details-link employee-trigger">View All Employees</a>
+
+              <a href="#" class="view-details-link employee-trigger"
+                >View All Employees</a
+              >
             </div>
           </div>
           <!-- UPDATE YOUR EXISTING CARD LINK -->
 
+          <!-- ADD THIS MODAL MARKUP TO YOUR PAGE BODY -->
+          <div id="employeeModal" class="modal">
+            <div class="modal-content large-modal">
+              <!-- Header with Title and Search -->
+              <div class="modal-header custom-header">
+                <h2>Employee Details</h2>
+                <div class="search-wrapper">
+                  <i class="fas fa-search"></i>
+                  <input
+                    type="text"
+                    id="employeeSearch"
+                    placeholder="Search..."
+                  />
+                </div>
+                <span class="close-employee-btn">&times;</span>
+              </div>
 
-<!-- ADD THIS MODAL MARKUP TO YOUR PAGE BODY -->
-<div id="employeeModal" class="modal">
-    <div class="modal-content large-modal">
-        <!-- Header with Title and Search -->
-        <div class="modal-header custom-header">
-            <h2>Employee Details</h2>
-            <div class="search-wrapper">
-                <i class="fas fa-search"></i>
-                <input type="text" id="employeeSearch" placeholder="Search...">
-            </div>
-            <span class="close-employee-btn">&times;</span>
-        </div>
-
-        <!-- Scrollable Table Body -->
-        <div class="modal-body">
-            <table class="employee-table">
-                <thead>
+              <!-- Scrollable Table Body -->
+              <div class="modal-body">
+                <table class="employee-table">
+                  <thead>
                     <tr>
-                        <th>Emp Id</th>
-                        <th>Name</th>
-                        
-                        <th>Email</th>
-                        <th>Position</th>
-                        <th>Salary</th>
-                        
+                      <th>Emp Id</th>
+                      <th>Name</th>
+
+                      <th>Email</th>
+                      <th>Position</th>
+                      <th>Salary</th>
                     </tr>
-                </thead>
-                <tbody id="employeeTableBody">
+                  </thead>
+                  <tbody id="employeeTableBody">
                     <!-- Javascript will populate rows here -->
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
           <!-- Jobs Applicants (Span 1) -->
           <div class="card medium-card" id="job-applicants">
