@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
+//employee details status modal
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
     const employeeModal = document.getElementById('employeeModal');
@@ -313,19 +313,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Event: Search Functionality
-    if (searchInput) {
-        searchInput.addEventListener('keyup', (e) => {
-            const term = e.target.value.toLowerCase();
-            const filtered = EMPLOYEES.filter(emp => 
-                emp.name.toLowerCase().includes(term) || 
-                emp.surname.toLowerCase().includes(term) ||
-                emp.email.toLowerCase().includes(term) ||
-                emp.position.toLowerCase().includes(term)
-            );
-            renderTable(filtered);
-        });
-    }
+    
+// Event: Search Functionality
+if (searchInput) {
+    searchInput.addEventListener('keyup', (e) => {
+        const term = e.target.value.toLowerCase();
+        
+        const filtered = EMPLOYEES.filter(emp => 
+            // This checks if the user's typed text exists inside the employee's name
+            emp.name.toLowerCase().includes(term)
+        );
+        
+        renderTable(filtered);
+    });
+}
 
     // Event: Close Modal
     if(closeBtn) {
