@@ -269,14 +269,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Data matching the reference image
     const EMPLOYEES = [
-        { id: 1, name: "Emily", surname: "Thompson", email: "emily.thompson23@gmail.com", position: "Web Developer", status: "Active", img: "https://i.pravatar.cc/150?u=1" },
-        { id: 2, name: "Michael", surname: "Johnson", email: "m.johnson87@gmail.com", position: "Mobile Developer", status: "Inactive", img: "https://i.pravatar.cc/150?u=2" },
-        { id: 3, name: "Jessica", surname: "Carter", email: "jessica.carter89@yahoo.com", position: "QA", status: "Active", img: "https://i.pravatar.cc/150?u=3" },
-        { id: 4, name: "Olivia", surname: "Brooks", email: "olivia.brooks91@outlook.com", position: "UX/UI designer", status: "Inactive", img: "https://i.pravatar.cc/150?u=4" },
-        { id: 5, name: "Ethan", surname: "Miller", email: "ethan.miller22@protonmail.com", position: "Graphic designer", status: "Active", img: "https://i.pravatar.cc/150?u=8" },
-        { id: 6, name: "Jacob", surname: "Anderson", email: "jacob.anderson77@hotmail.com", position: "Sales manager", status: "Active", img: "https://i.pravatar.cc/150?u=6" },
-        { id: 7, name: "Sophia", surname: "Martinez", email: "sophia.m@gmail.com", position: "Content Writer", status: "Active", img: "https://i.pravatar.cc/150?u=7" },
-        { id: 8, name: "Daniel", surname: "Wilson", email: "dan.wilson@tech.com", position: "Project Manager", status: "Inactive", img: "https://i.pravatar.cc/150?u=5" },
+        { id: 1, name: "Emily", email: "emily.thompson23@gmail.com", position: "Web Developer", img: "https://i.pravatar.cc/150?u=1" },
+        { id: 2, name: "Michael", email: "m.johnson87@gmail.com", position: "Mobile Developer", img: "https://i.pravatar.cc/150?u=2" },
+        { id: 3, name: "Jessica", email: "jessica.carter89@yahoo.com", position: "QA", status: "Active", img: "https://i.pravatar.cc/150?u=3" },
+        { id: 4, name: "Olivia", email: "olivia.brooks91@outlook.com", position: "UX/UI designer", img: "https://i.pravatar.cc/150?u=4" },
+        { id: 5, name: "Ethan", email: "ethan.miller22@protonmail.com", position: "Graphic designer", img: "https://i.pravatar.cc/150?u=8" },
+        { id: 6, name: "Jacob",  email: "jacob.anderson77@hotmail.com", position: "Sales manager", img: "https://i.pravatar.cc/150?u=6" },
+        { id: 7, name: "Sophia", email: "sophia.m@gmail.com", position: "Content Writer", img: "https://i.pravatar.cc/150?u=7" },
+        { id: 8, name: "Daniel", email: "dan.wilson@tech.com", position: "Project Manager", img: "https://i.pravatar.cc/150?u=5" },
     ];
 
     // Function to Render Table
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${emp.surname}</td>
                         <td>${emp.email}</td>
                         <td>${emp.position}</td>
-                        <td><span class="badge ${badgeClass}">${emp.status}</span></td>
+                        
                     </tr>
                 `;
             });
