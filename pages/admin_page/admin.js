@@ -256,3 +256,89 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 });
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // DOM Elements
+    const employeeModal = document.getElementById('employeeModal');
+    const tableBody = document.getElementById('employeeTableBody');
+    const searchInput = document.getElementById('employeeSearch');
+    const closeBtn = document.querySelector('.close-employee-btn');
+    const triggerBtn = document.querySelector('.employee-trigger');
+
+    // Data matching the reference image
+    const EMPLOYEES = [
+        { id: 1, name: "Emily", surname: "Thompson", email: "emily.thompson23@gmail.com", position: "Web Developer", status: "Active", img: "https://i.pravatar.cc/150?u=1" },
+        { id: 2, name: "Michael", surname: "Johnson", email: "m.johnson87@gmail.com", position: "Mobile Developer", status: "Inactive", img: "https://i.pravatar.cc/150?u=2" },
+        { id: 3, name: "Jessica", surname: "Carter", email: "jessica.carter89@yahoo.com", position: "QA", status: "Active", img: "https://i.pravatar.cc/150?u=3" },
+        { id: 4, name: "Olivia", surname: "Brooks", email: "olivia.brooks91@outlook.com", position: "UX/UI designer", status: "Inactive", img: "https://i.pravatar.cc/150?u=4" },
+        { id: 5, name: "Ethan", surname: "Miller", email: "ethan.miller22@protonmail.com", position: "Graphic designer", status: "Active", img: "https://i.pravatar.cc/150?u=8" },
+        { id: 6, name: "Jacob", surname: "Anderson", email: "jacob.anderson77@hotmail.com", position: "Sales manager", status: "Active", img: "https://i.pravatar.cc/150?u=6" },
+        { id: 7, name: "Sophia", surname: "Martinez", email: "sophia.m@gmail.com", position: "Content Writer", status: "Active", img: "https://i.pravatar.cc/150?u=7" },
+        { id: 8, name: "Daniel", surname: "Wilson", email: "dan.wilson@tech.com", position: "Project Manager", status: "Inactive", img: "https://i.pravatar.cc/150?u=5" },
+    ];
+
+    // Function to Render Table
+    function renderTable(data) {
+        let html = '';
+        if(data.length === 0) {
+            html = '<tr><td colspan="6" style="text-align:center;">No employees found</td></tr>';
+        } else {
+            data.forEach(emp => {
+                const badgeClass = emp.status === 'Active' ? 'badge-active' : 'badge-inactive';
+                
+                html += `
+                    <tr>
+                        <td><img src="${emp.img}" alt="${emp.name}" class="avatar-img"></td>
+                        <td>${emp.name}</td>
+                        <td>${emp.surname}</td>
+                        <td>${emp.email}</td>
+                        <td>${emp.position}</td>
+                        <td><span class="badge ${badgeClass}">${emp.status}</span></td>
+                    </tr>
+                `;
+            });
+        }
+        tableBody.innerHTML = html;
+    }
+
+    // Event: Open Modal
+    if (triggerBtn) {
+        triggerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            renderTable(EMPLOYEES); // Render all data initially
+            employeeModal.style.display = "block";
+        });
+    }
+
+    // Event: Search Functionality
+    if (searchInput) {
+        searchInput.addEventListener('keyup', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = EMPLOYEES.filter(emp => 
+                emp.name.toLowerCase().includes(term) || 
+                emp.surname.toLowerCase().includes(term) ||
+                emp.email.toLowerCase().includes(term) ||
+                emp.position.toLowerCase().includes(term)
+            );
+            renderTable(filtered);
+        });
+    }
+
+    // Event: Close Modal
+    if(closeBtn) {
+        closeBtn.onclick = () => {
+            employeeModal.style.display = "none";
+            searchInput.value = ''; // Reset search on close
+        };
+    }
+
+    // Close on clicking outside
+    window.onclick = (event) => {
+        if (event.target === employeeModal) {
+            employeeModal.style.display = "none";
+            if(searchInput) searchInput.value = '';
+        }
+    };
+});

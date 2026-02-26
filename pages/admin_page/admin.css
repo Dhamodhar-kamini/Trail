@@ -1398,3 +1398,135 @@ thead th {
     margin-bottom: 5px;
   }
 }
+
+
+/* --- Modal Customizations --- */
+.large-modal {
+    max-width: 1100px; /* Wider modal for this table */
+    height: 90vh;      /* Fixed height for consistent look */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Custom Header Layout */
+.custom-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+/* Search Bar Styling */
+.search-wrapper {
+    position: relative;
+    margin-left: auto;
+    margin-right: 20px;
+    width: 250px;
+}
+
+.search-wrapper input {
+    width: 100%;
+    padding: 10px 10px 10px 35px; /* Space for icon */
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.search-wrapper input:focus {
+    border-color: #bbb;
+    background-color: #fff;
+}
+
+.search-wrapper i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+/* Table Specific Styling */
+.employee-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.employee-table th {
+    color: #999;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.employee-table td {
+    padding: 15px;
+    vertical-align: middle;
+    color: #333;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Photo Column */
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Status Badges (Active/Inactive) */
+.badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-align: center;
+    display: inline-block;
+    min-width: 80px;
+}
+
+.badge-active {
+    background-color: #f0f9f0; /* Light Green Bg */
+    color: #66bb6a;            /* Green Text */
+    border: 1px solid #e0f2e0;
+}
+
+.badge-inactive {
+    background-color: #f5f5f5; /* Light Grey Bg */
+    color: #bdbdbd;            /* Grey Text */
+    border: 1px solid #eee;
+}
+
+/* Ensure sticky header works from previous code */
+.modal-body {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.modal-body thead th {
+    position: sticky;
+    top: 0;
+    background: #fff; /* White background for header */
+    z-index: 5;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .large-modal { width: 95%; margin: 2.5% auto; }
+    .search-wrapper { width: 150px; }
+    .modal-header h2 { font-size: 1.2rem; }
+    
+    /* Hide less important columns on mobile */
+    .employee-table th:nth-child(3), .employee-table td:nth-child(3), /* Surname */
+    .employee-table th:nth-child(4), .employee-table td:nth-child(4)  /* Email */
+    {
+        display: none; 
+    }
+}

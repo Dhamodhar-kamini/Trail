@@ -738,20 +738,46 @@
                   ><span class="value">04</span>
                 </div>
               </div>
-              <div class="top-performer">
-                <p>Top Performer</p>
-                <div class="performer-card">
-                  <img
-                    src="https://via.placeholder.com/40/33FF57/ffffff?text=DE"
-                    alt="Performer"
-                  />
-                  <div><strong>Arjun </strong><small>IOS Developer</small></div>
-                  <span class="performance">99%</span>
-                </div>
-              </div>
-              <a href="#" class="view-details-link">View All Employees</a>
+              
+              <a href="#" class="view-details-link employee-trigger">View All Employees</a>
             </div>
           </div>
+          <!-- UPDATE YOUR EXISTING CARD LINK -->
+
+
+<!-- ADD THIS MODAL MARKUP TO YOUR PAGE BODY -->
+<div id="employeeModal" class="modal">
+    <div class="modal-content large-modal">
+        <!-- Header with Title and Search -->
+        <div class="modal-header custom-header">
+            <h2>Employee Details</h2>
+            <div class="search-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="employeeSearch" placeholder="Search...">
+            </div>
+            <span class="close-employee-btn">&times;</span>
+        </div>
+
+        <!-- Scrollable Table Body -->
+        <div class="modal-body">
+            <table class="employee-table">
+                <thead>
+                    <tr>
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Email</th>
+                        <th>Position</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="employeeTableBody">
+                    <!-- Javascript will populate rows here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
           <!-- Jobs Applicants (Span 1) -->
           <div class="card medium-card" id="job-applicants">
