@@ -177,3 +177,82 @@ document.getElementById("empForm").addEventListener("submit", function(e){
   alert("Employee Added Successfully ✅");
   empModal.style.display = "none";
 });
+
+
+//attendance details modal
+document.addEventListener('DOMContentLoaded', () => {
+    const detailModal = document.getElementById('detailModal');
+    const modalTableBody = document.getElementById('modalTableBody');
+    const closeBtn = document.querySelector('.close-btn');
+
+    // Dummy Data
+    const ATTENDANCE_LOG_DATA = [
+        { id: 21918, name: "Anugrah Prasetya", role: "Graphic Designer", date: "24-07-2024", duration: "8h 0m", permission: "Sick Leave", status: "Pending" },
+        { id: 37189, name: "Denny Malik", role: "IT Support", date: "22-08-2024", duration: "4h 0m", permission: "Appointment", status: "Rejected" },
+        { id: 41521, name: "Silvia Cintia Bakri", role: "Product Designer", date: "15-07-2024", duration: "8h 0m", permission: "Annual Leave", status: "Approved" },
+        { id: 12781, name: "Bambang Pramudi", role: "Customer Support", date: "10-08-2024", duration: "1h 30m", permission: "Late Entry", status: "Pending" },
+    ];
+
+    function renderAttendanceModal(data) {
+        let html = '';
+        data.forEach(item => {
+            const statusClass = item.status.toLowerCase();
+            
+            // Logic for the color of the avatar border based on status
+            const colorCode = statusClass === 'approved' ? '66BB6A' : statusClass === 'rejected' ? 'EF5350' : '42A5F5';
+
+            html += `
+                <tr>
+                    <td>#${item.id}</td>
+                    <td class="employee-cell">
+                        <img src="https://ui-avatars.com/api/?name=${item.name}&background=${colorCode}&color=fff" alt="${item.name}">
+                        <div class="employee-info">
+                            <strong>${item.name}</strong>
+                            <small>${item.role}</small>
+                        </div>
+                    </td>
+                    <td>${item.date}</td>
+                    <td>${item.duration}</td>
+                    <td>${item.permission}</td>
+                    <td class="action-cell">
+                        ${item.status === 'Pending' ? 
+                            `<div class="action-buttons">
+                                <button class="approve-btn">Approve</button>
+                                <button class="x-btn"><i class="fas fa-times"></i></button>
+                             </div>` : 
+                            `<span class="status-badge ${statusClass}">${item.status}</span>`
+                        }
+                    </td>
+                </tr>
+            `;
+        });
+        modalTableBody.innerHTML = html;
+        detailModal.style.display = "block";
+    }
+
+    function closeModal() {
+        detailModal.style.display = "none";
+    }
+
+    // --- THE FIX IS HERE ---
+    // We select based on the class 'attendance-trigger'
+    const attendanceLink = document.querySelector('.attendance-trigger');
+    
+    if (attendanceLink) {
+        attendanceLink.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            renderAttendanceModal(ATTENDANCE_LOG_DATA);
+        });
+    } else {
+        console.error("Attendance link not found! Check your HTML classes.");
+    }
+
+    // Modal controls
+    if(closeBtn) closeBtn.onclick = closeModal;
+    
+    window.onclick = (event) => {
+        if (event.target === detailModal) {
+            closeModal();
+        }
+    };
+});
