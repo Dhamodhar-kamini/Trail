@@ -493,6 +493,22 @@ body {
   cursor: pointer;
 }
 
+/* 1. Employee Details Table (Background Popup) */
+#employeeModal { 
+    z-index: 1000; 
+}
+
+/* 2. Add Employee Form (Foreground Popup) */
+#empModal { 
+    z-index: 2000; /* Higher than Table */
+    background: rgba(0,0,0,0.6); /* Darker overlay to distinguish depth */
+}
+
+/* 3. Success Message (Topmost) */
+#successModal { 
+    z-index: 3000; /* Highest */
+}
+
 /* Overlay for Success Modal */
 .success-modal-overlay {
     display: none; /* Hidden by default */

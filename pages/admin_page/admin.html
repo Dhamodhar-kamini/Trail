@@ -840,43 +840,43 @@
           <!-- UPDATE YOUR EXISTING CARD LINK -->
 
           <!-- ADD THIS MODAL MARKUP TO YOUR PAGE BODY -->
-          <div id="employeeModal" class="modal">
-            <div class="modal-content large-modal">
-              <!-- Header with Title and Search -->
-              <div class="modal-header custom-header">
-                <h2>Employee Details</h2>
-                
-                <div class="search-wrapper">
-                  <i class="fas fa-search"></i>
-                  <input
-                    type="text"
-                    id="employeeSearch"
-                    placeholder="Search..."
-                  />
-                </div>
-                <span class="close-employee-btn">&times;</span>
-              </div>
-
-              <!-- Scrollable Table Body -->
-              <div class="modal-body">
-                <table class="employee-table">
-                  <thead>
-                    <tr>
-                      <th>Emp Id</th>
-                      <th>Name</th>
-
-                      <th>Email</th>
-                      <th>Position</th>
-                      <th>Salary</th>
-                    </tr>
-                  </thead>
-                  <tbody id="employeeTableBody">
-                    <!-- Javascript will populate rows here -->
-                  </tbody>
-                </table>
-              </div>
+         <div id="employeeModal" class="modal">
+    <div class="modal-content large-modal">
+        <div class="modal-header custom-header">
+            <h2>Employee Details</h2>
+            
+            <div class="search-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" id="employeeSearch" placeholder="Search..."/>
             </div>
-          </div>
+            
+            <!-- CHANGED ID HERE to avoid conflict with dashboard button -->
+            <button class="btn-primary emp-add-btn" id="addEmpFromTableBtn">
+                <i class="fas fa-calendar-plus"></i>
+                Add Employee
+            </button>
+            
+            <span class="close-employee-btn">&times;</span>
+        </div>
+
+        <div class="modal-body">
+            <table class="employee-table">
+                <thead>
+                    <tr>
+                        <th>Emp Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Position</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody id="employeeTableBody">
+                    <!-- Javascript will populate rows here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
           <!-- Jobs Applicants (Span 1) -->
           <div class="card medium-card" id="job-applicants">

@@ -561,112 +561,70 @@ document.addEventListener("DOMContentLoaded", () => {
 //testing employee details status modal
 document.addEventListener("DOMContentLoaded", () => {
   // =========================================================
-  // 1. SHARED DATA (The Single Source of Truth)
+  // 1. SHARED DATA 
+  // (I standardized IDs to "001" format to match your request)
   // =========================================================
   const EMPLOYEES = [
-    {
-      id: 1,
-      name: "Emily",
-      email: "emily.thompson23@gmail.com",
-      position: "Web Developer",
-      emp_id: "001",
-      salary: "$70,000",
-    },
-    {
-      id: 2,
-      name: "Michael",
-      email: "m.johnson87@gmail.com",
-      position: "Mobile Developer",
-      emp_id: "002",
-      salary: "$65,000",
-    },
-    {
-      id: 3,
-      name: "Jessica",
-      email: "jessica.carter89@yahoo.com",
-      position: "QA",
-      status: "Active",
-      emp_id: "003",
-      salary: "$55,000",
-    },
-    {
-      id: 4,
-      name: "Olivia",
-      email: "olivia.brooks91@outlook.com",
-      position: "UX/UI designer",
-      emp_id: "004",
-      salary: "$68,000",
-    },
-    {
-      id: 5,
-      name: "Ethan",
-      email: "ethan.miller22@protonmail.com",
-      position: "Graphic designer",
-      emp_id: "005",
-      salary: "$52,000",
-    },
-    {
-      id: 6,
-      name: "Jacob",
-      email: "jacob.anderson77@hotmail.com",
-      position: "Sales manager",
-      emp_id: "006",
-      salary: "$72,000",
-    },
-    {
-      id: 7,
-      name: "Sophia",
-      email: "sophia.m@gmail.com",
-      position: "Content Writer",
-      emp_id: "007",
-      salary: "$50,000",
-    },
-    {
-      id: 8,
-      name: "Daniel",
-      email: "dan.wilson@tech.com",
-      position: "Project Manager",
-      emp_id: "008",
-      salary: "$75,000",
-    },
+    { id: 1, name: "Emily", email: "emily.thompson23@gmail.com", position: "Web Developer", emp_id: "001", salary: "$70,000" },
+    { id: 2, name: "Michael", email: "m.johnson87@gmail.com", position: "Mobile Developer", emp_id: "002", salary: "$65,000" },
+    { id: 3, name: "Jessica", email: "jessica.carter89@yahoo.com", position: "QA", status: "Active", emp_id: "003", salary: "$55,000" },
+    { id: 4, name: "Olivia", email: "olivia.brooks91@outlook.com", position: "UX/UI designer", emp_id: "004", salary: "$68,000" },
+    { id: 5, name: "Ethan", email: "ethan.miller22@protonmail.com", position: "Graphic designer", emp_id: "005", salary: "$52,000" },
+    { id: 6, name: "Jacob", email: "jacob.anderson77@hotmail.com", position: "Sales manager", emp_id: "006", salary: "$72,000" },
+    { id: 7, name: "Sophia", email: "sophia.m@gmail.com", position: "Content Writer", emp_id: "007", salary: "$50,000" },
+    { id: 8, name: "Daniel", email: "dan.wilson@tech.com", position: "Project Manager", emp_id: "008", salary: "$75,000" },
   ];
 
   // =========================================================
-  // 2. VIEW EMPLOYEES TABLE LOGIC
+  // 2. DOM ELEMENTS
   // =========================================================
+  // Table Elements
   const employeeModal = document.getElementById("employeeModal");
   const tableBody = document.getElementById("employeeTableBody");
   const searchInput = document.getElementById("employeeSearch");
   const closeEmployeeBtn = document.querySelector(".close-employee-btn");
-  const triggerEmployeeBtn = document.querySelector(".employee-trigger"); // The button that opens the table
+  const triggerEmployeeBtn = document.querySelector(".employee-trigger"); 
+  const addEmpFromTableBtn = document.getElementById("addEmpFromTableBtn"); // Button inside table
 
-  // Function to Render Table
+  // Form Elements
+  const empModal = document.getElementById("empModal");
+  const empOpenBtn = document.getElementById("empOpenBtn"); // Dashboard button
+  const empCloseBtn = document.getElementById("empCloseBtn");
+  const empCancelBtn = document.getElementById("empCancelBtn");
+  const empForm = document.getElementById("empForm");
+  
+  // Success Elements
+  const successModal = document.getElementById("successModal");
+  const successOkBtn = document.getElementById("successOkBtn");
+
+  // =========================================================
+  // 3. TABLE FUNCTIONS
+  // =========================================================
   function renderTable(data) {
     let html = "";
     if (data.length === 0) {
-      html =
-        '<tr><td colspan="5" style="text-align:center;">No employees found</td></tr>';
+      html = '<tr><td colspan="5" style="text-align:center;">No employees found</td></tr>';
     } else {
       data.forEach((emp) => {
         html += `
-                    <tr>
-                        <td>${emp.emp_id}</td>
-                        <td>${emp.name}</td>
-                        <td>${emp.email}</td>
-                        <td>${emp.position}</td>
-                        <td>${emp.salary}</td>
-                    </tr>
-                `;
+            <tr>
+                <td>${emp.emp_id}</td>
+                <td>${emp.name}</td>
+                <td>${emp.email}</td>
+                <td>${emp.position}</td>
+                <td>${emp.salary}</td>
+            </tr>
+        `;
       });
     }
     if (tableBody) tableBody.innerHTML = html;
   }
 
-  // Open "View Employees" Modal
+  // Open Table Logic
   if (triggerEmployeeBtn) {
     triggerEmployeeBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      renderTable(EMPLOYEES); // Always render latest data
+      renderTable(EMPLOYEES); 
       employeeModal.style.display = "block";
     });
   }
@@ -676,53 +634,48 @@ document.addEventListener("DOMContentLoaded", () => {
     searchInput.addEventListener("keyup", (e) => {
       const term = e.target.value.toLowerCase();
       const filtered = EMPLOYEES.filter((emp) =>
-        emp.name.toLowerCase().includes(term),
+        emp.name.toLowerCase().includes(term) ||
+        emp.emp_id.toLowerCase().includes(term)
       );
       renderTable(filtered);
     });
   }
 
-  // Close "View Employees" Modal
-  if (closeEmployeeBtn) {
-    closeEmployeeBtn.onclick = () => {
+  // Close Table Logic
+  const closeTableModal = () => {
       employeeModal.style.display = "none";
-      searchInput.value = "";
-    };
+      if(searchInput) searchInput.value = "";
   }
+  if (closeEmployeeBtn) closeEmployeeBtn.onclick = closeTableModal;
+
 
   // =========================================================
-  // 3. ADD EMPLOYEE FORM LOGIC
+  // 4. FORM OPEN/CLOSE LOGIC
   // =========================================================
-  const empModal = document.getElementById("empModal");
-  const empOpenBtn = document.getElementById("empOpenBtn");
-  const empCloseBtn = document.getElementById("empCloseBtn");
-  const empCancelBtn = document.getElementById("empCancelBtn");
-  const empForm = document.getElementById("empForm");
-
-  // Success Modal Elements
-  const successModal = document.getElementById("successModal");
-  const successOkBtn = document.getElementById("successOkBtn");
-
-  // Open "Add Employee" Form
+  
+  // A. Open from Main Dashboard
   if (empOpenBtn) empOpenBtn.onclick = () => (empModal.style.display = "flex");
 
-  // Close Functions
+  // B. Open from Inside Table (The fix you asked for)
+  if (addEmpFromTableBtn) {
+      addEmpFromTableBtn.onclick = () => {
+          // We do NOT close employeeModal here. We just open the form on top.
+          empModal.style.display = "flex";      
+      }
+  }
+
+  // Close Form Logic
   const closeAddModal = () => {
     empModal.style.display = "none";
   };
 
-  if (empCloseBtn)
-    empCloseBtn.onclick = () => {
-      closeAddModal();
-      resetForm();
-    };
-  if (empCancelBtn)
-    empCancelBtn.onclick = () => {
-      closeAddModal();
-      resetForm();
-    };
+  if (empCloseBtn) empCloseBtn.onclick = () => { closeAddModal(); resetForm(); };
+  if (empCancelBtn) empCancelBtn.onclick = () => { closeAddModal(); resetForm(); };
 
-  // Validation Utilities
+
+  // =========================================================
+  // 5. VALIDATION
+  // =========================================================
   const setError = (element, message) => {
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector(".error-msg");
@@ -744,119 +697,81 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const isValidEmail = (email) => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+    return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(String(email).toLowerCase());
   };
-
-  const isValidPassword = (password) => {
-    const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@$!#%*?&]{6,}$/; // Minimum 6 characters, at least one letter, one number and one special character
-    return re.test(String(password));   
-  }
 
   const validateInputs = () => {
     let isValid = true;
     const name = document.getElementById("nameInput");
+    const empId = document.getElementById("empIdInput");
     const email = document.getElementById("emailInput");
     const password = document.getElementById("passwordInput");
     const hireDate = document.getElementById("dateInput");
     const salary = document.getElementById("salaryInput");
 
-    if (name.value.trim() === "") {
-      setError(name, "Name is required");
-      isValid = false;
-    } else {
-      setSuccess(name);
-    }
-
-    if (email.value.trim() === "") {
-      setError(email, "Email is required");
-      isValid = false;
-    } else if (!isValidEmail(email.value.trim())) {
-      setError(email, "Invalid email");
-      isValid = false;
-    } else {
-      setSuccess(email);
-    }
-
-    if (password.value.trim() === "") {
-      setError(password, "Password required");
-      isValid = false;
-    } else if (password.value.trim().length < 6) {
-      setError(password, "Password must be at least 6 characters");
-      isValid = false;
-    }
-
-     else if (!isValidPassword(password.value.trim())) {
-      setError(password, "Minimum 6 characters, at least one letter, one number and one special character");
-      isValid = false;
-    } else {
-      setSuccess(password);
-    }
-
-    if (hireDate.value === "") {
-      setError(hireDate, "Date required");
-      isValid = false;
-    } else {
-      setSuccess(hireDate);
-    }
-
-    if (salary.value !== "" && salary.value < 0) {
-      setError(salary, "Invalid salary");
-      isValid = false;
-    } else {
-      setSuccess(salary);
-    }
+    if (name.value.trim() === "") { setError(name, "Name is required"); isValid = false; } else { setSuccess(name); }
+    if (empId.value.trim() === "") { setError(empId, "Employee ID is required"); isValid = false; } else if (isNaN(empId.value.trim()) || empId.value.trim().length < 3) { setError(empId, "Employee ID must be numeric and at least 3 characters long"); isValid = false; } else { setSuccess(empId); }
+    if (email.value.trim() === "") { setError(email, "Email is required"); isValid = false; } else if (!isValidEmail(email.value.trim())) { setError(email, "Invalid email"); isValid = false; } else { setSuccess(email); }
+    if (password.value.trim() === "") { setError(password, "Password required"); isValid = false; } else if (password.value.trim().length < 6) { setError(password, "Min 6 chars"); isValid = false; } else { setSuccess(password); }
+    if (hireDate.value === "") { setError(hireDate, "Date required"); isValid = false; } else { setSuccess(hireDate); }
+    if (salary.value !== "" && salary.value < 0) { setError(salary, "Invalid salary"); isValid = false; } else { setSuccess(salary); }
 
     return isValid;
   };
 
-  // --- SUBMIT: THE BRIDGE BETWEEN FORM AND TABLE ---
+  // =========================================================
+  // 6. SUBMIT & UPDATE LOGIC
+  // =========================================================
   empForm.addEventListener("submit", function (e) {
     e.preventDefault();
 
     if (validateInputs()) {
       // 1. Get Values
-      const empidVal = document.getElementById("empIdInput").value;
       const nameVal = document.getElementById("nameInput").value;
+      const empIdVal = document.getElementById("empIdInput").value;
       const emailVal = document.getElementById("emailInput").value;
       const jobVal = document.getElementById("jobInput").value;
       const salaryVal = document.getElementById("salaryInput").value;
 
-      // 2. Generate new ID and Emp ID
-      // const newId = EMPLOYEES.length + 1;
-      const empidNum = empidVal.trim().padStart(3, "0");
-      // Adds leading zeros (e.g., EMP009)
-      const newEmpId = empidNum;
+      // 2. ID GENERATION (Fixed)
+      const empIdNum = parseInt(empIdVal);
+      // Look at the last ID in the array (e.g., "008") and add 1
+      
+    //   const lastEmp = EMPLOYEES[EMPLOYEES.length - 1];
+    //   const lastIdNum = lastEmp ? parseInt(lastEmp.empIdVal) : 0;
+    
+    //   const newIdNum = lastIdNum + 1;
+      // Pad with zeros: 9 -> "009"
+      const newEmpId = String(empIdNum).padStart(3, "0");
 
-      // 3. Format Salary (add ₹ and commas)
-      const formattedSalary = salaryVal
-        ? "₹" + parseInt(salaryVal).toLocaleString()
-        : "₹0";
+      // 3. Format Salary
+      const formattedSalary = salaryVal ? "₹" + parseInt(salaryVal).toLocaleString() : "₹0";
 
       // 4. Create Object
       const newEmployee = {
-        id: empidNum,
+        id: empIdNum,
         name: nameVal,
         email: emailVal,
-        position: jobVal || "Not Specified", // Fallback if empty
-        emp_id: newEmpId,
+        position: jobVal || "Not Specified",
+        emp_id: newEmpId, // Uses the generated ID
         salary: formattedSalary,
       };
 
-      // 5. Push to Shared Array
+      // 5. Update Array
       EMPLOYEES.push(newEmployee);
       console.log("New Employee Added:", newEmployee);
 
-      // 6. Refresh Table (So it's ready when you view it)
+      // 6. Refresh Table (Background table updates instantly)
       renderTable(EMPLOYEES);
 
       // 7. Handle Modals
-      closeAddModal();
-      if (successModal) successModal.style.display = "flex";
+      closeAddModal(); // Close the form
+      if (successModal) successModal.style.display = "flex"; // Show success
+      // Note: We do NOT close employeeModal (table) here
     }
   });
 
+  // Success Button Action
   if (successOkBtn) {
     successOkBtn.onclick = () => {
       successModal.style.display = "none";
@@ -865,17 +780,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // =========================================================
-  // 4. GLOBAL CLICK HANDLER (Handles closing all modals)
+  // 7. GLOBAL CLICK HANDLER (Smart Closing)
   // =========================================================
   window.onclick = function (e) {
+    // If clicking outside Add Form
     if (e.target === empModal) {
       closeAddModal();
       resetForm();
     }
-    if (e.target === employeeModal) {
-      employeeModal.style.display = "none";
-      if (searchInput) searchInput.value = "";
+    // If clicking outside Table (Only if Add Form is NOT open)
+    // This prevents closing the table when you are actually clicking the Add Form overlay
+    if (e.target === employeeModal && empModal.style.display !== "flex") {
+      closeTableModal();
     }
+    // If clicking outside Success
     if (e.target === successModal) {
       successModal.style.display = "none";
       resetForm();
