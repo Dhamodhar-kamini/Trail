@@ -320,15 +320,26 @@ body {
 /* Modal */
 /* Ensure the modal scrolls if the screen is small */
 .emp-modal-box {
-  background: #fff; /* or #1e293b for dark mode per image */
+  background: #fff;
   padding: 25px;
   border-radius: 8px;
   width: 500px;
   max-width: 95%;
-  max-height: 90vh; /* Limits height to 90% of screen */
-  overflow-y: auto; /* Adds scrollbar inside modal */
+  max-height: 90vh;
+  overflow-y: auto;
   position: relative;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+
+  /* Hide scrollbar (Firefox) */
+  scrollbar-width: none;
+
+  /* Hide scrollbar (IE & Edge old) */
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar (Chrome, Safari, Edge new) */
+.emp-modal-box::-webkit-scrollbar {
+  display: none;
 }
 
 /* Radio Button Group */

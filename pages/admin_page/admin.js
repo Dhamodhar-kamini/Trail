@@ -11,12 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const OPENINGS_CONTENT = `
         <div class="user-entry">
-            <img src="https://via.placeholder.com/35/33FF57/ffffff?text=O1">
+            <img src="../assets/profiledp.jpeg">
             <div><strong>Lead Backend Engineer</strong><small>Exp: 5+ Years • USA</small></div>
             <span class="badge python" style="background-color: var(--color-purple);">Python</span>
         </div>
         <div class="user-entry">
-            <img src="https://via.placeholder.com/35/FF5733/ffffff?text=O2">
+            <img src="../assets/profiledp.jpeg">
             <div><strong>HR Manager</strong><small>Exp: 3+ Years • UK</small></div>
             <span class="badge finance" style="background-color: var(--color-red);">HR</span>
         </div>
@@ -24,22 +24,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const APPLICANTS_CONTENT = `
         <div class="user-entry">
-            <img src="https://via.placeholder.com/35/007bff/ffffff?text=A1">
+            <img src="../assets/profiledp.jpeg">
             <div><strong>Brian Villalobos</strong><small>Exp: 5+ Years • USA</small></div>
             <span class="badge ui-ux" style="background-color: var(--color-teal);">UI/UX Designer</span>
         </div>
         <div class="user-entry">
-            <img src="https://via.placeholder.com/35/dc3545/ffffff?text=A2">
+            <img src="../assets/profiledp.jpeg">
             <div><strong>Anthony Lewis</strong><small>Exp: 4+ Years • USA</small></div>
             <span class="badge python" style="background-color: var(--color-blue);">Python Developer</span>
         </div>
         <div class="user-entry">
-            <img src="https://via.placeholder.com/35/ffc107/ffffff?text=A3">
+            <img src="../assets/profiledp.jpeg">
             <div><strong>Stephan Peralt</strong><small>Exp: 6+ Years • USA</small></div>
             <span class="badge android" style="background-color: var(--color-orange);">Android Developer</span>
         </div>
         <div class="user-entry">
-            <img src="https://via.placeholder.com/35/6f42c1/ffffff?text=A4">
+            <img src="../assets/profiledp.jpeg">
             <div><strong>Doglas Martini</strong><small>Exp: 2+ Years • USA</small></div>
             <span class="badge react" style="background-color: var(--color-green);">React Developer</span>
         </div>
@@ -366,11 +366,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const ATTENDANCE_LOG_DATA = [
     {
       id: 21918,
-      name: "Anugrah Prasetya",
+      name: "Dhamodhar Kamini",
       role: "Graphic Designer",
-      date: "24-07-2024",
-      duration: "8h 0m",
-      permission: "Sick Leave",
+      date: "26-02-2026",
+      checkIn: "8h 0m",
+      permission: "07:00 PM",
       status: "Pending",
     },
     {
@@ -565,14 +565,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // (I standardized IDs to "001" format to match your request)
   // =========================================================
   const EMPLOYEES = [
-    { id: 1, name: "Emily", email: "emily.thompson23@gmail.com", position: "Web Developer", emp_id: "001", salary: "$70,000" },
-    { id: 2, name: "Michael", email: "m.johnson87@gmail.com", position: "Mobile Developer", emp_id: "002", salary: "$65,000" },
-    { id: 3, name: "Jessica", email: "jessica.carter89@yahoo.com", position: "QA", status: "Active", emp_id: "003", salary: "$55,000" },
-    { id: 4, name: "Olivia", email: "olivia.brooks91@outlook.com", position: "UX/UI designer", emp_id: "004", salary: "$68,000" },
-    { id: 5, name: "Ethan", email: "ethan.miller22@protonmail.com", position: "Graphic designer", emp_id: "005", salary: "$52,000" },
-    { id: 6, name: "Jacob", email: "jacob.anderson77@hotmail.com", position: "Sales manager", emp_id: "006", salary: "$72,000" },
-    { id: 7, name: "Sophia", email: "sophia.m@gmail.com", position: "Content Writer", emp_id: "007", salary: "$50,000" },
-    { id: 8, name: "Daniel", email: "dan.wilson@tech.com", position: "Project Manager", emp_id: "008", salary: "$75,000" },
+    // { id: 1, name: "Emily", email: "emily.thompson23@gmail.com", position: "Web Developer", emp_id: "001", salary: "$70,000" },
+    // { id: 2, name: "Michael", email: "m.johnson87@gmail.com", position: "Mobile Developer", emp_id: "002", salary: "$65,000" },
+    // { id: 3, name: "Jessica", email: "jessica.carter89@yahoo.com", position: "QA", status: "Active", emp_id: "003", salary: "$55,000" },
+    // { id: 4, name: "Olivia", email: "olivia.brooks91@outlook.com", position: "UX/UI designer", emp_id: "004", salary: "$68,000" },
+    // { id: 5, name: "Ethan", email: "ethan.miller22@protonmail.com", position: "Graphic designer", emp_id: "005", salary: "$52,000" },
+    // { id: 6, name: "Jacob", email: "jacob.anderson77@hotmail.com", position: "Sales manager", emp_id: "006", salary: "$72,000" },
+    // { id: 7, name: "Sophia", email: "sophia.m@gmail.com", position: "Content Writer", emp_id: "007", salary: "$50,000" },
+    // { id: 8, name: "Daniel", email: "dan.wilson@tech.com", position: "Project Manager", emp_id: "008", salary: "$75,000" },
   ];
 
   // =========================================================
